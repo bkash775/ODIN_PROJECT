@@ -1,82 +1,561 @@
 <!DOCTYPE html>
-
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-	<link rel="stylesheet" href="./style.css">
-        <title>My Resume</title>
-    </head>
-    <body>
-        <h1>Resume</h1>
-        <p lang="en-US">👋 I am <em>Bikash Kunwar</em>, a Computer Science graduate who is enthusiastic about advancing my career in the realm of <strong>Cyber Security</strong>. My strong desire to learn and acquire new skills drives me to contribute effectively to the company's mission. With a solid technological acumen, I possess hands-on experience working with an array of <em>Linux</em> and <em>Windows</em> tools and applications, primarily concentrating on bolstering computer security infrastructure.</p>
-        <p lang="en-US">My upbeat outlook and unwavering motivation fuel my eagerness to develop fresh skills and strategies, enabling me to continually propel my journey in the cyber security domain.</p>
-        <h1>🧾Experience</h1>
-        <h2>Junior Network Associate</h2>
-        <p><em><strong>Max Net Solutions Pvt. Ltd.</em></strong></p>
-        <p><em>Kathmandu, Nepal-(May 2022 - November 2022)</em></p>
-        <ul>
-            <li><p>Engaged in active network monitoring to ensure seamless operations and rapid identification of potential issues, enhancing network reliability.</p></li>
-            <li><p>Spearheaded network troubleshooting efforts, diagnosing and resolving connectivity and performance problems swiftly to minimize downtime.</p></li>
-            <li><p>Assisted in network management tasks, including configuring devices, optimizing performance, and ensuring adherence to security protocols.</p></li>
-            <li><p>Provided essential network support to users, addressing their concerns promptly and optimizing their network experience.</p></li>
-        </ul>
-        <h2>🥷Skills</h2>
-        <ul>
-            <li><em>Cybersecurity Fundamentals</em></li>
-            <li><em>Network Basics</em></li>
-            <li><em>Operating Systems</em></li>
-            <li><em>Security Tools</em></li>
-            <li><em>Python</em></li>
-            <li><em>Bash</em></li>
-            <li><em>SIEM Platforms</em></li>
-            <li><em>Continuous Learning</em></li>
-            <li><em>Analytical Skills</em></li>
-            <li><em>Communication Skills</em></li>
-            <li><em>Problem-Solving</em></li>
-            <li><em>Team Collaboration</em></li>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Resume</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+        
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background-color: #1a1a1a;
+            color: #00ff41;
+            overflow-x: hidden;
+        }
+        
+        .terminal {
+            background-color: rgba(0, 0, 0, 0.85);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            border: 1px solid #00ff41;
+        }
+        
+        .terminal-header {
+            background-color: #333;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            padding: 8px 12px;
+        }
+        
+        .terminal-body {
+            padding: 20px;
+            height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .command-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .prompt {
+            color: #00ff41;
+            margin-right: 10px;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: #00ff41;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .typing {
+            border-right: 2px solid #00ff41;
+            animation: blink 1s infinite;
+        }
+        
+        .command-output {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .glow {
+            text-shadow: 0 0 5px #00ff41;
+        }
+        
+        .tab {
+            display: inline-block;
+            margin-left: 20px;
+        }
+        
+        .link {
+            color: #00ff41;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        
+        .link:hover {
+            color: #00cc33;
+        }
+        
+        .skill-bar {
+            background-color: #333;
+            height: 20px;
+            border-radius: 4px;
+            margin: 5px 0;
+            overflow: hidden;
+        }
+        
+        .skill-level {
+            height: 100%;
+            background-color: #00ff41;
+            border-radius: 4px;
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #00ff41;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00cc33;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="terminal w-full max-w-4xl">
+        <div class="terminal-header flex items-center">
+            <div class="flex space-x-2 mr-4">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <div class="text-white text-sm">user@terminal: ~/resume</div>
+        </div>
+        
+        <div class="terminal-body" id="terminal">
+            <div class="command-output">
+                <div class="text-xl mb-2 glow">Welcome to my interactive terminal resume!</div>
+                <div>Type <span class="font-bold">'help'</span> to see available commands.</div>
+            </div>
+            
+            <div class="command-line">
+                <span class="prompt">user@terminal:~$</span>
+                <span id="input" class="flex-1"></span>
+                <span class="cursor" id="cursor"></span>
+            </div>
+        </div>
+    </div>
 
-        </ul>
-        <h2>🎓Education</h2>
-        <h3>Bachelor's Degree in Computer Science Engineering</h3>
-        <p><em>2022 (completed)</em></p>
-        <p><strong>Dr. Ambedkar Institute of Technology - Bangalore, India🇮🇳</strong></p>
-        <h2>🎟️Licenses & certifications</h2>
-        <ul>
-            <li><em><strong>Fortinet Network Security Expert level 1 </strong></em></li>
-            <ul>
-                <li><a href="https://training.fortinet.com/mod/customcert/verify_certificate.php" target="_blank" rel="noopener noreferrer">certificate1</a>
-            </ul>
-            <li><em><strong>Foundations of Cybersecurity</strong></em></li>
-            <ul>
-                <li><a href="https://coursera.org/verify/TYA7YSCUNF7X" target="_blank" rel="noopener noreferrer">certificate2</a></li>
-            </ul>
-            <li><em><strong>CCNA 200-301 completed course</strong></em></li>
-            <ul>
-                <li>Code:<em>B12143</em></li>
-                <li><a href="https://verify.broadwayinfosys.com/certificate-verification" target="noopener" rel="noopener noreferrer">certificate3</a></li>
-            </ul>
-            <li><em><strong>IBM Fundamentals of Red Hat Enterprise Linux</strong></em></li>
-            <ul>
-                <li><a href="https://coursera.org/verify/QZGLTVGNKVV7" target="_blank" rel="noopener noreferrer">certificate4</a></li>
-
-            </ul>
-        </ul>
-        <h2>🗣️Languages</h2>
-        <p><strong>Nepali 🇳🇵</strong></p>
-        <ul>
-            <li> <p><em>Native speaker</em></p></li>
-        </ul>
-        <p><strong>English 🇺🇸</strong></p>
-        <ul>
-            <li><p><em>Upper_Intermediate</em></p></li>
-        </ul>
-        <h2>Contact</h2>
-        <h4>📧bkash775@gmail.com</h4>
-        <p><em>Linkedin:</em><a href="https://www.linkedin.com/in/bikash-kunwar-6b8a77133/" target="_blank" rel="noopener noreferrer">Linkedin</a></p>
-	
-
-
-
-    </body>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const terminal = document.getElementById('terminal');
+            const input = document.getElementById('input');
+            const cursor = document.getElementById('cursor');
+            
+            let commandHistory = [];
+            let historyIndex = -1;
+            let currentInput = '';
+            
+            // Initial greeting animation
+            setTimeout(() => {
+                typeText('help', () => {
+                    setTimeout(() => {
+                        executeCommand('help');
+                    }, 500);
+                });
+            }, 1000);
+            
+            // Focus on terminal
+            document.addEventListener('click', function() {
+                cursor.style.display = 'inline-block';
+            });
+            
+            // Handle keyboard input
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    executeCommand(currentInput);
+                    currentInput = '';
+                    input.textContent = '';
+                } 
+                else if (e.key === 'Backspace') {
+                    if (currentInput.length > 0) {
+                        currentInput = currentInput.slice(0, -1);
+                        input.textContent = currentInput;
+                    }
+                }
+                else if (e.key === 'ArrowUp') {
+                    if (historyIndex < commandHistory.length - 1) {
+                        historyIndex++;
+                        currentInput = commandHistory[commandHistory.length - 1 - historyIndex];
+                        input.textContent = currentInput;
+                    }
+                }
+                else if (e.key === 'ArrowDown') {
+                    if (historyIndex > 0) {
+                        historyIndex--;
+                        currentInput = commandHistory[commandHistory.length - 1 - historyIndex];
+                        input.textContent = currentInput;
+                    } else {
+                        historyIndex = -1;
+                        currentInput = '';
+                        input.textContent = '';
+                    }
+                }
+                else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
+                    currentInput += e.key;
+                    input.textContent = currentInput;
+                }
+            });
+            
+            function typeText(text, callback) {
+                let i = 0;
+                currentInput = '';
+                input.textContent = '';
+                
+                const typingInterval = setInterval(() => {
+                    if (i < text.length) {
+                        currentInput += text.charAt(i);
+                        input.textContent = currentInput;
+                        i++;
+                    } else {
+                        clearInterval(typingInterval);
+                        if (callback) callback();
+                    }
+                }, 50);
+            }
+            
+            function executeCommand(cmd) {
+                // Add to history
+                commandHistory.push(cmd);
+                historyIndex = -1;
+                
+                // Create new command line
+                const newCommand = document.createElement('div');
+                newCommand.className = 'command-line mb-2';
+                newCommand.innerHTML = `
+                    <span class="prompt">user@terminal:~$</span>
+                    <span>${cmd}</span>
+                `;
+                terminal.insertBefore(newCommand, terminal.lastElementChild);
+                
+                // Process command
+                const output = document.createElement('div');
+                output.className = 'command-output mb-6';
+                
+                switch(cmd.toLowerCase()) {
+                    case 'help':
+                        output.innerHTML = `
+                            <div class="mb-4">Available commands:</div>
+                            <div><span class="font-bold">about</span> - About me</div>
+                            <div><span class="font-bold">skills</span> - My technical skills</div>
+                            <div><span class="font-bold">experience</span> - Work experience</div>
+                            <div><span class="font-bold">education</span> - Education background</div>
+                            <div><span class="font-bold">projects</span> - Notable projects</div>
+                            <div><span class="font-bold">contact</span> - Contact information</div>
+                            <div><span class="font-bold">clear</span> - Clear terminal</div>
+                            <div class="mt-4">Try clicking on any of these commands!</div>
+                        `;
+                        break;
+                        
+                    case 'about':
+                        output.innerHTML = `
+                            <div class="text-xl mb-4 glow">ABOUT ME</div>
+                            <div class="mb-4">
+                                <span class="font-bold">Name:</span> Bikash Kunwar
+                            </div>
+                            <div class="mb-4">
+                                <span class="font-bold">Title:</span> SysAdmin and DevOps 
+                            </div>
+                            <div class="mb-4">
+                                <span class="font-bold">Location:</span>  kathmandu, Nepal
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'skills':
+                        output.innerHTML = `
+                            <div class="text-xl mb-4 glow">TECHNICAL SKILLS</div>
+                            <div class="mb-2"><span class="font-bold">Languages:</span> JavaScript, Python</div>
+                            <div class="mb-2"><span class="font-bold">Frontend:</span> React, HTML5, CSS3, Tailwind</div>
+                            <div class="mb-2"><span class="font-bold">Backend:</span> Java, Spring Boot</div>
+                            <div class="mb-2"><span class="font-bold">Databases:</span> MSSQL, PostgreSQL, MySQL</div>
+                            <div class="mb-2"><span class="font-bold">DevOps:</span> Docker, Kubernetes, AWS, CI/CD</div>
+                            
+                            <div class="mt-6 mb-2 font-bold">Skill Proficiency:</div>
+                            <div>JavaScript/React <span class="skill-bar"><span class="skill-level" style="width: 90%"></span></span></div>
+                            <div>Node.js/Express <span class="skill-bar"><span class="skill-level" style="width: 85%"></span></span></div>
+                            <div>Python/Django <span class="skill-bar"><span class="skill-level" style="width: 80%"></span></span></div>
+                            <div>AWS Cloud <span class="skill-bar"><span class="skill-level" style="width: 75%"></span></span></div>
+                            <div>Database Design <span class="skill-bar"><span class="skill-level" style="width: 85%"></span></span></div>
+                        `;
+                        break;
+                        
+                    case 'experience':
+                        output.innerHTML = `
+                            <div class="text-xl mb-4 glow">WORK EXPERIENCE</div>
+                            
+                            <div class="mb-6">
+                                <div class="font-bold">Senior Full Stack Developer</div>
+                                <div>Tech Solutions Inc. • 2020 - Present</div>
+                                <div class="mt-2 tab">
+                                    - Led a team of 5 developers to build a SaaS platform<br>
+                                    - Implemented microservices architecture improving performance by 40%<br>
+                                    - Developed CI/CD pipelines reducing deployment time by 60%<br>
+                                    - Mentored junior developers and conducted code reviews
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <div class="font-bold">Web Developer</div>
+                                <div>Digital Creations • 2017 - 2020</div>
+                                <div class="mt-2 tab">
+                                    - Developed responsive web applications for clients<br>
+                                    - Optimized frontend performance reducing load times by 30%<br>
+                                    - Integrated RESTful APIs with frontend systems<br>
+                                    - Collaborated with designers to implement UI/UX
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="font-bold">Junior Developer</div>
+                                <div>StartUp Labs • 2015 - 2017</div>
+                                <div class="mt-2 tab">
+                                    - Assisted in developing MVP for startup clients<br>
+                                    - Fixed bugs and implemented new features<br>
+                                    - Learned agile development methodologies<br>
+                                    - Gained experience with full development lifecycle
+                                </div>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'education':
+                        output.innerHTML = `
+                            <div class="text-xl mb-4 glow">EDUCATION</div>
+                            
+                            <div class="mb-4">
+                                <div class="font-bold">Master of Computer Science</div>
+                                <div>Stanford University • 2013 - 2015</div>
+                                <div class="mt-2 tab">Specialization in Software Engineering</div>
+                            </div>
+                            
+                            <div>
+                                <div class="font-bold">Bachelor of Science in Computer Science</div>
+                                <div>University of California, Berkeley • 2009 - 2013</div>
+                                <div class="mt-2 tab">Minor in Mathematics</div>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'projects':
+                        output.innerHTML = `
+                            <div class="text-xl mb-4 glow">NOTABLE PROJECTS</div>
+                            
+                            <div class="mb-6">
+                                <div class="font-bold">E-commerce Platform (2022)</div>
+                                <div class="mt-2 tab">
+                                    - Built with React, Node.js, and MongoDB<br>
+                                    - Implemented payment gateway integration<br>
+                                    - Developed admin dashboard with analytics<br>
+                                    - <span class="link" onclick="executeCommand('view project1')">View details</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <div class="font-bold">Task Management App (2021)</div>
+                                <div class="mt-2 tab">
+                                    - Vue.js frontend with Firebase backend<br>
+                                    - Real-time collaboration features<br>
+                                    - Role-based access control<br>
+                                    - <span class="link" onclick="executeCommand('view project2')">View details</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="font-bold">AI Recommendation Engine (2020)</div>
+                                <div class="mt-2 tab">
+                                    - Python machine learning model<br>
+                                    - Integrated with web service API<br>
+                                    - Personalized content recommendations<br>
+                                    - <span class="link" onclick="executeCommand('view project3')">View details</span>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'view project1':
+                        output.innerHTML = `
+                            <div class="text-xl mb-4 glow">E-COMMERCE PLATFORM</div>
+                            
+                            <div class="mb-4">
+                                <div class="font-bold">Technologies:</div>
+                                <div class="tab">React, Node.js, Express, MongoDB, Stripe API, AWS S3, Redis</div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="font-bold">Features:</div>
+                                <div class="tab">- Product catalog with search and filters</div>
+                                <div class="tab">- Shopping cart and checkout process</div>
+                                <div class="tab">- User authentication and profiles</div>
+                                <div class="tab">- Order tracking and history</div>
+                                <div class="tab">- Admin dashboard for inventory management</div>
+                            </div>
+                            
+                            <div>
+                                <div class="font-bold">Impact:</div>
+                                <div class="tab">- Processed $2M+ in transactions first year</div>
+                                <div class="tab">- Reduced cart abandonment by 25%</div>
+                                <div class="tab">- Handled 10,000+ concurrent users during sales</div>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'view project2':
+                        output.innerHTML = `
+                            <div class="text-xl mb-4 glow">TASK MANAGEMENT APP</div>
+                            
+                            <div class="mb-4">
+                                <div class="font-bold">Technologies:</div>
+                                <div class="tab">Vue.js, Firebase, Firestore, Vuex, Vuetify</div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="font-bold">Features:</div>
+                                <div class="tab">- Drag-and-drop task boards</div>
+                                <div class="tab">- Real-time updates across devices</div>
+                                <div class="tab">- File attachments and comments</div>
+                                <div class="tab">- Calendar view with deadlines</div>
+                                <div class="tab">- Team collaboration spaces</div>
+                            </div>
+                            
+                            <div>
+                                <div class="font-bold">Impact:</div>
+                                <div class="tab">- Adopted by 50+ small businesses</div>
+                                <div class="tab">- Reduced meeting time by 30% for teams</div>
+                                <div class="tab">- 95% user retention after 3 months</div>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'view project3':
+                        output.innerHTML = `
+                            <div class="text-xl mb-4 glow">AI RECOMMENDATION ENGINE</div>
+                            
+                            <div class="mb-4">
+                                <div class="font-bold">Technologies:</div>
+                                <div class="tab">Python, Scikit-learn, Pandas, Flask, PostgreSQL</div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="font-bold">Features:</div>
+                                <div class="tab">- Collaborative filtering algorithm</div>
+                                <div class="tab">- Content-based recommendations</div>
+                                <div class="tab">- User behavior analysis</div>
+                                <div class="tab">- A/B testing framework</div>
+                                <div class="tab">- REST API for integration</div>
+                            </div>
+                            
+                            <div>
+                                <div class="font-bold">Impact:</div>
+                                <div class="tab">- Increased click-through rate by 35%</div>
+                                <div class="tab">- Reduced bounce rate by 22%</div>
+                                <div class="tab">- Personalized recommendations for 100K+ users</div>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'contact':
+                        output.innerHTML = `
+                            <div class="text-xl mb-4 glow">CONTACT INFORMATION</div>
+                            
+                            <div class="mb-4">
+                                <div class="font-bold">Email:</div>
+                                <div class="tab link" onclick="copyToClipboard('john.doe@example.com')">john.doe@example.com <i class="fas fa-copy ml-2"></i></div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="font-bold">Phone:</div>
+                                <div class="tab link" onclick="copyToClipboard('+1 (555) 123-4567')">+1 (555) 123-4567 <i class="fas fa-copy ml-2"></i></div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="font-bold">LinkedIn:</div>
+                                <div class="tab link" onclick="window.open('https://linkedin.com/in/johndoe', '_blank')">linkedin.com/in/johndoe <i class="fas fa-external-link-alt ml-2"></i></div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="font-bold">GitHub:</div>
+                                <div class="tab link" onclick="window.open('https://github.com/johndoe', '_blank')">github.com/johndoe <i class="fas fa-external-link-alt ml-2"></i></div>
+                            </div>
+                            
+                            <div>
+                                <div class="font-bold">Portfolio:</div>
+                                <div class="tab link" onclick="window.open('https://johndoe.dev', '_blank')">johndoe.dev <i class="fas fa-external-link-alt ml-2"></i></div>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'clear':
+                        // Remove all command outputs except the last command line
+                        const outputs = document.querySelectorAll('.command-output');
+                        const commands = document.querySelectorAll('.command-line:not(:last-child)');
+                        
+                        outputs.forEach(el => el.remove());
+                        commands.forEach(el => el.remove());
+                        return; // Skip adding output for clear command
+                        
+                    default:
+                        output.innerHTML = `
+                            <div>Command not found: ${cmd}</div>
+                            <div>Type <span class="font-bold">'help'</span> to see available commands.</div>
+                        `;
+                }
+                
+                terminal.insertBefore(output, terminal.lastElementChild);
+                
+                // Scroll to bottom
+                terminal.scrollTop = terminal.scrollHeight;
+            }
+            
+            // Make executeCommand available globally for click handlers
+            window.executeCommand = executeCommand;
+            
+            function copyToClipboard(text) {
+                navigator.clipboard.writeText(text).then(() => {
+                    // Show copied notification
+                    const notification = document.createElement('div');
+                    notification.className = 'absolute top-4 right-4 bg-green-800 text-white px-4 py-2 rounded';
+                    notification.textContent = 'Copied to clipboard!';
+                    document.body.appendChild(notification);
+                    
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 2000);
+                });
+            }
+            
+            // Make commands clickable
+            terminal.addEventListener('click', function(e) {
+                if (e.target.classList.contains('link')) {
+                    return; // Let link handle its own click
+                }
+                
+                // Find if a command was clicked
+                let target = e.target;
+                while (target && target !== terminal) {
+                    if (target.tagName === 'DIV' && target.textContent.match(/^(about|skills|experience|education|projects|contact|help|clear)$/i)) {
+                        typeText(target.textContent.trim().toLowerCase(), () => {
+                            setTimeout(() => {
+                                executeCommand(target.textContent.trim().toLowerCase());
+                            }, 300);
+                        });
+                        return;
+                    }
+                    target = target.parentElement;
+                }
+            });
+        });
+    </script>
+</body>
 </html>
